@@ -2,18 +2,31 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-  
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-        monospace;
+
+@font-face {
+    font-family: roboto-bold;
+    src: url('/src/assets/fonts/Roboto/Roboto-Bold.ttf');
 }
 
+@font-face {
+    font-family: roboto-medium;
+    src: url('/src/assets/fonts/Roboto/Roboto-Medium.ttf');
+}
+
+@font-face {
+    font-family: roboto-regular;
+    src: url('/src/assets/fonts/Roboto/Roboto-Regular.ttf');
+}
+
+@font-face {
+    font-family: roboto-italic;
+    src: url('/src/assets/fonts/Roboto/Roboto-Italic.ttf');
+}
+  
 html {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-      sans-serif;
+    font-family: roboto-regular, roboto-medium, roboto-bold, roboto-italic;
     box-sizing: border-box;
-    font-size: 65.2%;
+    font-size: 62.5%;
     line-height: 1.5;
 }
 
