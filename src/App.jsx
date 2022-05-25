@@ -1,11 +1,13 @@
 import React from 'react'
-import style from './App.module.scss'
-import classNames from 'classnames'
+// import classNames from 'classnames'
+import AppNav from './components/AppNav/AppNav'
+import BoardNav from './components/BoardNav/BoardNav'
 
 function App() {
     return (
         <div className="App">
-            <div className={classNames(style.app)}></div>
+            <AppNav />
+            <BoardNav />
         </div>
     )
 }
