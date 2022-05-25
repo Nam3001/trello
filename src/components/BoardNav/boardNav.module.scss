@@ -1,0 +1,46 @@
+@use '/src/styles/variable';
+
+.boardNav {
+    background-color: variable.$board-color;
+    height: 5rem;
+    width: 100vw;
+    padding: 1rem;
+    display: flex;
+    // align-items: center;
+    
+    .dropdown {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        background-color: variable.$white-color;
+        color: #fff;
+        font-size: 1.5rem;
+        padding: 0.6rem 0.8rem;
+        border-radius: 0.25rem;
+        height: 3.2rem;
+        cursor: pointer;
+        margin-right: 1rem;
+        width: variable.$board-btn-width;
+
+        &:hover {
+            background-color: variable.$hover-color;
+        }
+
+        .iconSpinner {
+            width: 17px;
+            margin-right: 0.4rem;
+            img {
+                width: 100%;
+            }
+        }
+
+        .iconWrapper {
+            padding-left: 0.6rem;
+        }
+        
+        .icon {
+            font-size: 1.2rem;
+        }
+    }        
+}

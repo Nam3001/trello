@@ -1,0 +1,47 @@
+@use '/src/styles/variable';
+
+.boardName {
+    max-width: calc(100vw - variable.$board-btn-width - 0.5rem);
+    display: flex;
+    align-items: center;
+    height: 3.2rem;
+    color: #fff;
+    font-weight: bold;
+    line-height: 3.2rem;
+    cursor: pointer;
+    
+    div {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding: 0 1rem;
+        font-size: 1.8rem;
+        
+        &:hover {
+            background-color: variable.$hover-color;
+            border-radius: 0.3rem;
+        }
+    }
+
+    input {
+        display: block;
+        padding: 0 1rem;
+        font-family: roboto-bold;
+        font-size: 1.8rem;
+        outline: none;
+        border-radius: 0.3rem;
+        border: 2px solid variable.$border-color;
+        height: 100%;
+        max-width: 100%;
+    }
+
+    div, input {
+        display: none;
+        height: 100%;
+        max-width: calc(100vw - 110px);
+    }
+
+    .active {
+        display: block;
+    }
+}
