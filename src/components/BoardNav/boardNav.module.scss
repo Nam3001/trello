@@ -2,11 +2,10 @@
 
 .boardNav {
     background-color: variable.$board-color;
-    height: 5rem;
+    height: variable.$board-nav-height;
     width: 100vw;
     padding: 1rem;
     display: flex;
-    // align-items: center;
     
     .dropdown {
         display: flex;
@@ -14,7 +13,7 @@
         align-items: center;
         border: none;
         background-color: variable.$white-color;
-        color: #fff;
+        color: variable.$text-color;
         font-size: 1.5rem;
         padding: 0.6rem 0.8rem;
         border-radius: 0.25rem;

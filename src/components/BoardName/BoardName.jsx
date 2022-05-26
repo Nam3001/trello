@@ -22,13 +22,14 @@ function BoardName() {
         document.body.appendChild(text)
 
         Object.assign(text.style, {
-            fontFamily: 'roboto-bold',
+            fontFamily: 'roboto, sans-serif',
             fontSize: '1.8rem',
+            fontWeight: 'bold',
             position: 'absolute',
-            padding: '0 1.3rem',
+            padding: '0 1rem',
             whiteSpace: 'nowrap'
         })
-        text.innerHTML = textInput
+        text.textContent = textInput
 
         const width = Math.ceil(text.clientWidth)
         const formattedWidth = width + 'px'

@@ -1,0 +1,39 @@
+@use '/src/styles/variable' as *;
+
+.boardWrapper {
+    background-color: $board-color;
+    color: $text-color;
+    white-space: nowrap;
+    height: $board-height;
+    
+    .board {
+        display: flex;
+        height: calc(100% - 0.75rem);
+        width: auto;
+        overflow-x: auto;
+        margin: 0 1.6rem 1.6rem;
+
+        &::-webkit-scrollbar {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+        &::-webkit-scrollbar:horizontal {
+            height: 1.2rem;
+        }
+        &::-webkit-scrollbar-thumb {
+            border-radius: 0.5rem;
+            background-color: $hover-color;
+        }
+        
+        &::-webkit-scrollbar-track {
+            border-radius: 0.5rem;
+            background-color: rgb(4, 90, 4, 0.3);
+        }
+
+        .columnWrapper {
+            margin: 0 4px;
+        }
+        
+    }
+}

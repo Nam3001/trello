@@ -2,6 +2,14 @@ $nav-bar-color: #447f2f;
 $board-color: #519839;
 $white-color: rgba(230, 230, 230, 0.3);
 $hover-color: rgba(230, 230, 230, 0.4);
-$text-color: #333;
 $border-color: #156de8;
+$text-color: #fff;
+$column-color: #ebecf0;
+$column-text-color: #455670;
+
+$app-nav-height: 4.4rem;
+$board-nav-height: 5rem;
+$outline-width: 2px;
+$board-height: calc(100vh - $app-nav-height - $board-nav-height);
+
 $board-btn-width: 9rem;
