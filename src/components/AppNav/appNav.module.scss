@@ -2,7 +2,7 @@
 
 .appNav {
     background-color: variable.$nav-bar-color;
-    height: 4.4rem;
+    height: variable.$app-nav-height;
     padding: 0.6rem;
     width: 100vw;
     display: flex;
@@ -64,6 +64,6 @@
     }
 
     .icon {
-        color: #fff;
+        color: variable.$text-color;
     }
 }

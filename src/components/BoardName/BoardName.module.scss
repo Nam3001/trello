@@ -5,7 +5,7 @@
     display: flex;
     align-items: center;
     height: 3.2rem;
-    color: #fff;
+    color: variable.$text-color;
     font-weight: bold;
     line-height: 3.2rem;
     cursor: pointer;
@@ -25,8 +25,9 @@
 
     input {
         display: block;
-        padding: 0 1rem;
-        font-family: roboto-bold;
+        padding: 0 0.8rem;
+        font-family: 'roboto', sans-serif;
+        font-weight: bold;
         font-size: 1.8rem;
         outline: none;
         border-radius: 0.3rem;
@@ -38,7 +39,7 @@
     div, input {
         display: none;
         height: 100%;
-        max-width: calc(100vw - 110px);
+        max-width: calc(100vw - 116px);
     }
 
     .active {
