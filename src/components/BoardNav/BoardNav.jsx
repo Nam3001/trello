@@ -29,4 +29,4 @@ function BoardNav() {
     )
 }
 
-export default BoardNav
+export default React.memo(BoardNav)
