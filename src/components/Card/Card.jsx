@@ -5,4 +5,4 @@ function Card({ children }) {
     return <div className={style.card}>{children}</div>
 }
 
-export default Card
+export default React.memo(Card)
