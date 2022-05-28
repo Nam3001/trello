@@ -14,8 +14,10 @@
         background-color: variable.$column-color;
         width: 100%;
         padding: 0.3rem 0.8rem;
+        cursor: grab;
         
         textarea {
+            cursor: grab;
             font-size: 1.45rem;
             color: variable.$column-text-color;
             font-family: 'roboto', sans-serif;
@@ -33,6 +35,12 @@
                 outline: variable.$outline-width solid variable.$border-color;
                 border-radius: 0.2rem;
                 background: #fff;
+                cursor: auto;
+            }
+
+            &:active {
+                border: none;
+                cursor: grabbing;
             }
         }
     }
@@ -91,4 +99,10 @@
             }
         }        
     }
+}
+
+.card-drop-preview {
+    background-color: rgba(206, 206, 206, 0.3);
+    border: 1px dashed variable.$border-color;
+    height: variable.$card-height;
 }
