@@ -40,6 +40,6 @@
 }
 
 .column-drop-preview {
-    background-color: rgba(234, 234, 234, 0.2);
-    border: 1px dashed $border-color;
+    background-color: $nav-bar-color;
+    border-radius: 0.3rem;
 }

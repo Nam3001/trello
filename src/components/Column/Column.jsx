@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import classNames from 'classnames/bind'
 import { Container, Draggable } from 'react-smooth-dnd'
 // font
@@ -22,10 +22,6 @@ function Column(props) {
         const newCardList = mapOrder(column.cardList, cardOrder, 'cardId')
         setCards(newCardList)
     }, [cardOrder, column.cardList])
-
-    const handleDoubleclick = useCallback((event) => {
-        console.log('a')
-    }, [])
 
     return (
         <div className={className}>
