@@ -3,9 +3,8 @@
 .boardWrapper {
     background-color: $board-color;
     color: $text-color;
-    white-space: nowrap;
     height: $board-height;
-    
+        
     .board {
         display: flex;
         height: calc(100% - 0.75rem);
@@ -38,4 +37,9 @@
         }
         
     }
+}
+
+.column-drop-preview {
+    background-color: rgba(234, 234, 234, 0.2);
+    border: 1px dashed $border-color;
 }

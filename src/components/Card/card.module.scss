@@ -2,7 +2,7 @@
 
 .card {
     width: 100%;
-    height: 3.2rem;
+    height: $card-height;
     background-color: #fff;
     color: $column-text-color;
     font-size: 1.5rem;
@@ -14,7 +14,10 @@
     line-height: 3.2rem;;
 
     &:hover {
-        cursor: pointer;
+        cursor: grab;
         background-color: #f6f4f4;
+    }
+    &:active {
+        cursor: grabbing;
     }
 }

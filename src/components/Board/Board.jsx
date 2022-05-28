@@ -1,49 +1,59 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useCallback, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
+import classNames from 'classnames/bind'
+import { Container, Draggable } from 'react-smooth-dnd'
+import isEmpty from 'lodash.isempty'
+
+import { mapOrder } from '@/utils/mapOrder'
 import Column from '../Column/Column'
-import Card from '../Card/Card'
 import style from './Board.module.scss'
 
+// bind classnames
+let cx = classNames.bind(style)
+
 function Board({ boardData }) {
-    const [columns, setColumns] = useState(boardData.columns.columnList)
+    const [columns, setColumns] = useState([])
     const [columnOrder, setColumnOrder] = useState(boardData.columnOrder)
 
-    const mapOrder = useCallback((array, order, key) => {
-        if (!Array.isArray(array)) return
-        array.sort((a, b) => order.indexOf(a[key]) - order.indexOf(b[key]))
-        return array
-    }, [])
-
     useEffect(() => {
-        const newColumnList = mapOrder([...columns], columnOrder, 'columnId')
+        const newColumnList = mapOrder(
+            boardData.columns.columnList,
+            columnOrder,
+            'columnId'
+        )
         setColumns(newColumnList)
     }, [columnOrder])
 
-    const handleChangeColumnName = useCallback((value) => {
-        setColumns(value)
-    }, [])
+    if (isEmpty(boardData)) {
+        return <h1>Page not found</h1>
+    }
 
-    console.log('rerender')
+    const items = ['item1', 'item2', 'item3', 'item4']
 
     return (
         <div className={style.boardWrapper}>
-            <div className={style.board}>
-                {columns.map((column) => (
-                    <Column
-                        key={column.columnId}
-                        className={style.columnWrapper}
-                        columnName={column.columnName}
-                        onChangeColumnName={handleChangeColumnName}
-                    >
-                        {mapOrder(
-                            column.cardList,
-                            column.cardOrder,
-                            'cardId'
-                        ).map((card) => (
-                            <Card key={card.cardId}>{card.content}</Card>
-                        ))}
-                    </Column>
-                ))}
+            <div className={cx('board')}>
+                <Container
+                    orientation="horizontal"
+                    dragHandleSelector=".column-drag-handle"
+                    dropPlaceholder={{
+                        animationDuration: 150,
+                        showOnTop: true,
+                        className: cx('column-drop-preview')
+                    }}
+                >
+                    {columns.map((column) => (
+                        <Draggable
+                            className={style.columnWrapper}
+                            key={column.columnId}
+                        >
+                            <Column
+                                className={style.columnWrapper}
+                                column={column}
+                            />
+                        </Draggable>
+                    ))}
+                </Container>
             </div>
         </div>
     )
