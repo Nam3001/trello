@@ -43,4 +43,11 @@ html {
     box-sizing: inherit;
     font-size: 1.6rem;
 }
-  
+
+.smooth-dnd-container.horizontal {
+    display: flex;
+}
+
+.smooth-dnd-container.horizontal > .smooth-dnd-draggable-wrapper {
+    display: block;
+}

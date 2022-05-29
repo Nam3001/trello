@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useRef } from 'react'
 import classNames from 'classnames/bind'
 import { Container, Draggable } from 'react-smooth-dnd'
@@ -8,20 +9,45 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import style from './Column.module.scss'
 import Card from '../Card/Card'
 import { mapOrder } from '@/utils/mapOrder'
+import { applyDrag } from '@/utils/applyDrag'
 
 let cx = classNames.bind(style)
 
 function Column(props) {
-    const { className, column } = props
+    const { className, board, setBoard } = props
     const textareaRef = useRef()
 
-    const [cards, setCards] = useState([])
-    const [cardOrder, setCardOrder] = useState(column.cardOrder)
+    const [column, setColumn] = useState(props.column)
+    const [cards, setCards] = useState(column.cardList)
+
+    const cardOrder = column.cardOrder
 
     useEffect(() => {
         const newCardList = mapOrder(column.cardList, cardOrder, 'cardId')
         setCards(newCardList)
-    }, [cardOrder, column.cardList])
+    }, [])
+
+    const onCardDrop = (dropResult, columnId) => {
+        const { removedIndex, addedIndex } = dropResult
+        if (removedIndex === null && addedIndex === null) return
+
+        // S1:
+        // const newBoard = { ...board }
+        // const columnIndex = board.columns.columnList.findIndex(
+        //     (x) => x.columnId === columnId
+        // )
+
+        const newColumn = { ...column }
+        newColumn.cardList = applyDrag(newColumn.cardList, dropResult)
+        setCards(newColumn.cardList)
+        setColumn(newColumn)
+    }
+
+    const onChangeColumnName = (e) => {
+        const newColumn = { ...column }
+        newColumn.columnName = e.target.value
+        setColumn(newColumn)
+    }
 
     return (
         <div className={className}>
@@ -36,7 +62,7 @@ function Column(props) {
                     <textarea
                         ref={textareaRef}
                         value={column.columnName}
-                        onChange={() => {}}
+                        onChange={onChangeColumnName}
                         disabled
                         onBlur={(e) => (e.target.disabled = true)}
                     />
@@ -45,11 +71,16 @@ function Column(props) {
                     <Container
                         orientation="vertical"
                         groupName="col"
+                        dragClass={cx('card-ghost')}
                         dropPlaceholder={{
                             animationDuration: 150,
                             showOnTop: true,
                             className: cx('card-drop-preview')
                         }}
+                        getChildPayload={(index) => column.cardList[index]}
+                        onDrop={(payload) =>
+                            onCardDrop(payload, column.columnId)
+                        }
                     >
                         {cards.map((card) => (
                             <Draggable key={card.cardId}>
