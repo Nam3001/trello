@@ -5,6 +5,7 @@ import { Container, Draggable } from 'react-smooth-dnd'
 import isEmpty from 'lodash.isempty'
 
 import { mapOrder } from '@/utils/mapOrder'
+import { applyDrag } from '@/utils/applyDrag'
 import Column from '../Column/Column'
 import style from './Board.module.scss'
 
@@ -12,23 +13,30 @@ import style from './Board.module.scss'
 let cx = classNames.bind(style)
 
 function Board({ boardData }) {
-    const [columns, setColumns] = useState([])
-    const [columnOrder, setColumnOrder] = useState(boardData.columnOrder)
+    const [board, setBoard] = useState(boardData)
+    const [columnList, setColumnList] = useState([])
+    const columnOrder = board.columnOrder
 
     useEffect(() => {
         const newColumnList = mapOrder(
-            boardData.columns.columnList,
+            board.columns.columnList,
             columnOrder,
             'columnId'
         )
-        setColumns(newColumnList)
-    }, [columnOrder])
+        setColumnList(newColumnList)
+    }, [])
 
-    if (isEmpty(boardData)) {
+    if (isEmpty(board)) {
         return <h1>Page not found</h1>
     }
 
-    const items = ['item1', 'item2', 'item3', 'item4']
+    const onColumnDrop = (dropResult) => {
+        const newColumns = applyDrag([...columnList], dropResult)
+        const newBoard = { ...board }
+        newBoard.columns.columnList = newColumns
+        setColumnList(newColumns)
+        setBoard(newBoard)
+    }
 
     return (
         <div className={style.boardWrapper}>
@@ -36,20 +44,24 @@ function Board({ boardData }) {
                 <Container
                     orientation="horizontal"
                     dragHandleSelector=".column-drag-handle"
+                    dragClass={cx('column-ghost')}
                     dropPlaceholder={{
                         animationDuration: 150,
                         showOnTop: true,
                         className: cx('column-drop-preview')
                     }}
+                    getChildPayload={(index) => {
+                        return board.columns.columnList[index]
+                    }}
+                    onDrop={onColumnDrop}
                 >
-                    {columns.map((column) => (
-                        <Draggable
-                            className={style.columnWrapper}
-                            key={column.columnId}
-                        >
+                    {columnList.map((column) => (
+                        <Draggable key={column.columnId}>
                             <Column
                                 className={style.columnWrapper}
                                 column={column}
+                                board={board}
+                                setBoard={setBoard}
                             />
                         </Draggable>
                     ))}

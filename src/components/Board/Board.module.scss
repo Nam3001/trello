@@ -34,6 +34,7 @@
 
         .columnWrapper {
             margin: 0 4px;
+            height: 100%;
         }
         
     }
@@ -42,4 +43,8 @@
 .column-drop-preview {
     background-color: $nav-bar-color;
     border-radius: 0.3rem;
+}
+
+.column-ghost {
+    transform: rotate(3deg);
 }
