@@ -1,0 +1,50 @@
+@use '/src/styles/variable' as *;
+
+.add-card {
+    width: 100%;
+    
+    .card-input {
+        font-family: 'roboto', sans-serif;
+        color: $column-text-color;
+        font-size: 1.4rem;
+        width: 100%;
+        resize: none;
+        border: none;
+        border-radius: 0.3rem;
+        padding: 0.5rem;
+        outline: none;
+    }
+
+    .add-button {
+        background-color: #0079bf;
+        color: $text-color;
+        border: none;
+        border-radius: 0.3rem;
+        padding: 0.8rem;
+        font-size: 1.4rem;
+        margin-right: 1rem;
+
+        &:hover {
+            background-color: #0169a4;
+            cursor: pointer;
+        }
+    }
+
+    .close {
+        color: #959595;
+        border: none;
+        height: 3rem;
+        width: 2.8rem;
+        transform: translateY(3px);
+
+        svg {
+            font-size: 2rem;
+        }
+
+        &:hover {
+            color: #626262;
+            cursor: pointer;
+        }
+        
+    }
+}

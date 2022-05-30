@@ -8,6 +8,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 import style from './Column.module.scss'
 import Card from '../Card/Card'
+import AddCard from '../AddCard/AddCard'
 import { mapOrder } from '@/utils/mapOrder'
 import { applyDrag } from '@/utils/applyDrag'
 
@@ -15,6 +16,7 @@ let cx = classNames.bind(style)
 
 function Column(props) {
     const { className, board, setBoard } = props
+    console.log(props.children)
     const textareaRef = useRef()
 
     const [column, setColumn] = useState(props.column)
@@ -88,6 +90,7 @@ function Column(props) {
                             </Draggable>
                         ))}
                     </Container>
+                    <AddCard />
                 </div>
                 <div className={cx('footer')}>
                     <div className={cx('footerInner')}>
