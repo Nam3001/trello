@@ -61,10 +61,13 @@ function Column(props) {
             setIsAddingCard(false)
         },
         onInput(e) {
+            e.target.style.height = e.target.scrollHeight + 'px'
             const cardContent = e.target.value
             setNewCard(cardContent)
         },
-        onAddCard() {
+        onAddItem() {
+            if (newCard === '') return
+
             const cardList = createCardData(cards, newCard)
             const newColumn = Object.assign({}, column)
             newColumn.cardList = cardList
@@ -115,11 +118,15 @@ function Column(props) {
                         ))}
                     </Container>
                     {isAddingCard && (
-                        <AddNewItem
-                            ref={addCardRef}
-                            cardContent={newCard}
-                            event={addCardEvent}
-                        />
+                        <div>
+                            <AddNewItem
+                                type="card"
+                                ref={addCardRef}
+                                cardContent={newCard}
+                                event={addCardEvent}
+                                placeholder="Nhập tiêu đề cho thẻ này..."
+                            />
+                        </div>
                     )}
                 </div>
                 {isAddingCard || (
