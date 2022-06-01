@@ -10,8 +10,8 @@ function App() {
     const [currentBoard, setCurrentBoard] = useState(data[0])
     const [boardName, setBoardName] = useState(currentBoard.boardName)
 
-    const handleChangeBoardName = useCallback((value) => {
-        setBoardName(value)
+    const handleChangeBoardName = useCallback((event) => {
+        setBoardName(event.target.value)
     }, [])
 
     const contextValue = {

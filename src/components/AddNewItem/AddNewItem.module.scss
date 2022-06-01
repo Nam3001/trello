@@ -2,6 +2,7 @@
 
 .add-card {
     width: 100%;
+    padding-bottom: 1rem;
     
     .card-input {
         font-family: 'roboto', sans-serif;
@@ -36,6 +37,7 @@
         height: 3rem;
         width: 2.8rem;
         transform: translateY(3px);
+        background-color: transparent;
 
         svg {
             font-size: 2rem;

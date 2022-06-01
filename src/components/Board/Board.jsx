@@ -3,9 +3,10 @@ import React, { useState, useEffect } from 'react'
 import classNames from 'classnames/bind'
 import { Container, Draggable } from 'react-smooth-dnd'
 import isEmpty from 'lodash.isempty'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
-import { mapOrder } from '@/utils/mapOrder'
-import { applyDrag } from '@/utils/applyDrag'
+import { mapOrder, applyDrag } from '@/utils'
 import Column from '../Column/Column'
 import style from './Board.module.scss'
 
@@ -41,31 +42,44 @@ function Board({ boardData }) {
     return (
         <div className={style.boardWrapper}>
             <div className={cx('board')}>
-                <Container
-                    orientation="horizontal"
-                    dragHandleSelector=".column-drag-handle"
-                    dragClass={cx('column-ghost')}
-                    dropPlaceholder={{
-                        animationDuration: 150,
-                        showOnTop: true,
-                        className: cx('column-drop-preview')
-                    }}
-                    getChildPayload={(index) => {
-                        return board.columns.columnList[index]
-                    }}
-                    onDrop={onColumnDrop}
-                >
-                    {columnList.map((column) => (
-                        <Draggable key={column.columnId}>
-                            <Column
-                                className={style.columnWrapper}
-                                column={column}
-                                board={board}
-                                setBoard={setBoard}
+                <div style={{ height: '100%' }}>
+                    <Container
+                        orientation="horizontal"
+                        dragHandleSelector=".column-drag-handle"
+                        dragClass={cx('column-ghost')}
+                        dropPlaceholder={{
+                            animationDuration: 150,
+                            showOnTop: true,
+                            className: cx('column-drop-preview')
+                        }}
+                        getChildPayload={(index) => {
+                            return board.columns.columnList[index]
+                        }}
+                        onDrop={onColumnDrop}
+                    >
+                        {columnList.map((column) => (
+                            <Draggable key={column.columnId}>
+                                <Column
+                                    className={style.columnWrapper}
+                                    column={column}
+                                    board={board}
+                                    setBoard={setBoard}
+                                />
+                            </Draggable>
+                        ))}
+                    </Container>
+                </div>
+                <div className={style.columnWrapper}>
+                    <div className={cx('add-new-column', 'btn')}>
+                        <span style={{ marginRight: '0.6rem' }}>
+                            <FontAwesomeIcon
+                                className={classNames(style.icon)}
+                                icon={faPlus}
                             />
-                        </Draggable>
-                    ))}
-                </Container>
+                        </span>
+                        Thêm danh sách khác
+                    </div>
+                </div>
             </div>
         </div>
     )

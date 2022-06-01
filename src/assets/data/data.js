@@ -26,14 +26,14 @@ const data = [
                     cardOrder: ['card6', 'card7', 'card8', 'card9', 'card10', 'card11', 'card12', 'card13', 'card14'],
                     cardList: [
                         { cardId: 'card6', content: 'card_06', cover: null },
-                        { cardId: 'card7', content: 'card_07' },
-                        { cardId: 'card8', content: 'card_08' },
-                        { cardId: 'card9', content: 'card_09' },
-                        { cardId: 'card10', content: 'card_10' },
-                        { cardId: 'card11', content: 'card_11' },
-                        { cardId: 'card12', content: 'card_12' },
-                        { cardId: 'card13', content: 'card_13' },
-                        { cardId: 'card14', content: 'card_14' }
+                        { cardId: 'card7', content: 'card_07', cover: null },
+                        { cardId: 'card8', content: 'card_08', cover: null },
+                        { cardId: 'card9', content: 'card_09', cover: null },
+                        { cardId: 'card10', content: 'card_10', cover: null },
+                        { cardId: 'card11', content: 'card_11', cover: null },
+                        { cardId: 'card12', content: 'card_12', cover: null },
+                        { cardId: 'card13', content: 'card_13', cover: null },
+                        { cardId: 'card14', content: 'card_14', cover: null }
                     ]
                 },
                 {
@@ -42,9 +42,31 @@ const data = [
                     columnName: 'column_3',
                     cardOrder: ['card15', 'card16', 'card17'],
                     cardList: [
-                        { cardId: 'card15', content: 'card_15' },
-                        { cardId: 'card16', content: 'card_16' },
-                        { cardId: 'card17', content: 'card_17' }
+                        { cardId: 'card15', content: 'card_15', cover: null },
+                        { cardId: 'card16', content: 'card_16', cover: null },
+                        { cardId: 'card17', content: 'card_17', cover: null }
+                    ]
+                },
+                {
+                    columnId: 'column4',
+                    boardId: 'board1',
+                    columnName: 'column_4',
+                    cardOrder: ['card15', 'card16', 'card17'],
+                    cardList: [
+                        { cardId: 'card18', content: 'card_15', cover: null },
+                        { cardId: 'card19', content: 'card_16', cover: null },
+                        { cardId: 'card20', content: 'card_17', cover: null }
+                    ]
+                },
+                {
+                    columnId: 'column5',
+                    boardId: 'board1',
+                    columnName: 'column_3',
+                    cardOrder: ['card15', 'card16', 'card17'],
+                    cardList: [
+                        { cardId: 'card21', content: 'card_15', cover: null },
+                        { cardId: 'card22', content: 'card_16', cover: null },
+                        { cardId: 'card23', content: 'card_17', cover: null }
                     ]
                 }
             ]

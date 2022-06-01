@@ -6,24 +6,29 @@ import { Container, Draggable } from 'react-smooth-dnd'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
+// component
 import style from './Column.module.scss'
 import Card from '../Card/Card'
-import AddCard from '../AddCard/AddCard'
-import { mapOrder } from '@/utils/mapOrder'
-import { applyDrag } from '@/utils/applyDrag'
+import AddNewItem from '../AddNewItem/AddNewItem'
+// utilities
+import { mapOrder, applyDrag, createCardData } from '@/utils'
 
 let cx = classNames.bind(style)
 
 function Column(props) {
-    const { className, board, setBoard } = props
-    console.log(props.children)
-    const textareaRef = useRef()
+    const { className } = props
 
+    // state
+    const [isAddingCard, setIsAddingCard] = useState(false)
     const [column, setColumn] = useState(props.column)
     const [cards, setCards] = useState(column.cardList)
+    const [newCard, setNewCard] = useState('')
+
+    // ref
+    const textareaRef = useRef(null)
+    const addCardRef = useRef(null)
 
     const cardOrder = column.cardOrder
-
     useEffect(() => {
         const newCardList = mapOrder(column.cardList, cardOrder, 'cardId')
         setCards(newCardList)
@@ -49,6 +54,25 @@ function Column(props) {
         const newColumn = { ...column }
         newColumn.columnName = e.target.value
         setColumn(newColumn)
+    }
+
+    const addCardEvent = {
+        onClose() {
+            setIsAddingCard(false)
+        },
+        onInput(e) {
+            const cardContent = e.target.value
+            setNewCard(cardContent)
+        },
+        onAddCard() {
+            const cardList = createCardData(cards, newCard)
+            const newColumn = Object.assign({}, column)
+            newColumn.cardList = cardList
+            setCards(cardList)
+            setColumn(newColumn)
+            setNewCard('')
+            addCardRef.current.focus()
+        }
     }
 
     return (
@@ -90,14 +114,25 @@ function Column(props) {
                             </Draggable>
                         ))}
                     </Container>
-                    <AddCard />
+                    {isAddingCard && (
+                        <AddNewItem
+                            ref={addCardRef}
+                            cardContent={newCard}
+                            event={addCardEvent}
+                        />
+                    )}
                 </div>
-                <div className={cx('footer')}>
-                    <div className={cx('footerInner')}>
-                        <FontAwesomeIcon icon={faPlus} />
-                        <span>Thêm thẻ</span>
+                {isAddingCard || (
+                    <div
+                        onClick={() => setIsAddingCard(true)}
+                        className={cx('footer')}
+                    >
+                        <div className={cx('footerInner')}>
+                            <FontAwesomeIcon icon={faPlus} />
+                            <span>Thêm thẻ</span>
+                        </div>
                     </div>
-                </div>
+                )}
             </div>
         </div>
     )

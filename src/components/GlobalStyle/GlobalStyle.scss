@@ -46,8 +46,27 @@ html {
 
 .smooth-dnd-container.horizontal {
     display: flex;
+    height: 100%;
 }
 
 .smooth-dnd-container.horizontal > .smooth-dnd-draggable-wrapper {
     display: block;
+}
+
+
+.btn {
+    margin: 0 1rem;
+    border: none;
+    padding: 1rem;
+    background-color: $white-color;
+    border-radius: 0.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: $text-color;
+    
+    &:hover {
+        background-color: $hover-color;
+    }
 }
