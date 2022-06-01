@@ -1,4 +1,4 @@
-export const applyDrag = (arr, dragResult) => {
+const applyDrag = (arr, dragResult) => {
     if (!Array.isArray(arr)) return null
     if (!dragResult) return arr
 
@@ -11,3 +11,5 @@ export const applyDrag = (arr, dragResult) => {
 
     return newArr
 }
+
+export default applyDrag

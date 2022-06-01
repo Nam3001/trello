@@ -48,21 +48,6 @@
 }
 
 .appNav {
-    .addBoard {
-        margin-left: 1rem;
-        width: 3rem;
-        background-color: variable.$white-color;
-        border-radius: 0.3rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-
-        &:hover {
-            background-color: variable.$hover-color;
-        }
-    }
-
     .icon {
         color: variable.$text-color;
     }

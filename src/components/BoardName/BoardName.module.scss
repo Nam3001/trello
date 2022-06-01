@@ -10,7 +10,7 @@
     line-height: 3.2rem;
     cursor: pointer;
     
-    div {
+    .nameDisplay {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -23,21 +23,26 @@
         }
     }
 
-    input {
-        display: block;
-        padding: 0 0.8rem;
-        font-family: 'roboto', sans-serif;
-        font-weight: bold;
-        font-size: 1.8rem;
-        outline: none;
-        border-radius: 0.3rem;
-        border: 2px solid variable.$border-color;
-        height: 100%;
-        max-width: 100%;
+    .nameInputWrapper {
+        .nameInput {
+            max-width: calc(100vw - 3rem - 13.5rem);
+            padding: 0.5rem 1rem;
+            border-radius: 0.3rem;
+            border: none;
+            font-family: 'roboto', sans-serif;
+            font-weight: bold;
+            font-size: 1.8rem;
+    
+            &:focus {
+                outline: 2px solid variable.$border-color;
+                border-radius: none;
+                border: none;
+            }
+        }
     }
 
-    div, input {
-        display: none;
+    .nameDisplay, .nameInputWrapper {
+        display: none ;
         height: 100%;
         max-width: calc(100vw - 116px);
     }

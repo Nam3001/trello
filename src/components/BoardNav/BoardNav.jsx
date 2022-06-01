@@ -2,6 +2,7 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import classNames from 'classnames'
 
 import BoardName from '../BoardName/BoardName'
 import style from './BoardNav.module.scss'
@@ -11,7 +12,7 @@ function BoardNav() {
     return (
         <>
             <div className={style.boardNav}>
-                <button className={style.dropdown}>
+                <button className={classNames(style.dropdown, 'btn')}>
                     <span className={style.iconSpinner}>
                         <img src={svg} alt="spinner" />
                     </span>

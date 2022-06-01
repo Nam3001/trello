@@ -36,6 +36,14 @@
             margin: 0 4px;
             height: 100%;
         }
+
+        .add-new-column {
+            height: 4rem;
+            width: $column-width;
+            justify-content: flex-start;
+            font-size: 1.4rem;
+            margin: 0;
+        }
         
     }
 }

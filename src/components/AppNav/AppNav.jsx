@@ -9,7 +9,7 @@ function AppNav() {
     return (
         <div className={classNames(style.appNav)}>
             <div className={classNames(style.logo)}></div>
-            <div className={classNames(style.addBoard)}>
+            <div className={classNames(style.addBoard, 'btn')}>
                 <FontAwesomeIcon
                     className={classNames(style.icon)}
                     icon={faPlus}

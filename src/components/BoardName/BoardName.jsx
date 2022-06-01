@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from 'react'
+import AutosizeInput from 'react-input-autosize'
 import style from './BoardName.module.scss'
 import classNames from 'classnames'
 
@@ -14,32 +15,6 @@ function BoardName() {
         inputRef?.current?.select()
     }, [isActiveBoardName])
 
-    useEffect(() => {
-        const textWidth = getTextWidth(inputRef.current.value)
-        inputRef.current.style.width = textWidth
-    }, [isActiveBoardName])
-
-    function getTextWidth(textInput) {
-        const text = document.createElement('span')
-        document.body.appendChild(text)
-
-        Object.assign(text.style, {
-            fontFamily: 'roboto, sans-serif',
-            fontSize: '1.8rem',
-            fontWeight: 'bold',
-            position: 'absolute',
-            padding: '0 1rem',
-            whiteSpace: 'nowrap'
-        })
-        text.textContent = textInput
-
-        const width = Math.ceil(text.clientWidth)
-        const formattedWidth = width + 'px'
-        document.body.removeChild(text)
-
-        return formattedWidth
-    }
-
     return (
         <div
             className={classNames(style.boardName)}
@@ -47,24 +22,23 @@ function BoardName() {
         >
             <div
                 className={classNames({
-                    [style.active]: !isActiveBoardName
+                    [style.active]: !isActiveBoardName,
+                    [style.nameDisplay]: true
                 })}
             >
                 {boardName}
             </div>
-            <input
-                ref={inputRef}
-                onBlur={() => setActiveBoardName(false)}
-                className={classNames({
-                    [style.active]: isActiveBoardName
-                })}
-                type="text"
-                value={boardName}
-                onChange={(e) => {
-                    e.target.style.width = getTextWidth(e.target.value)
-                    handleChangeBoardName(e.target.value)
-                }}
-            />
+
+            {isActiveBoardName && (
+                <AutosizeInput
+                    className={classNames(style.nameInputWrapper)}
+                    inputClassName={classNames(style.nameInput)}
+                    ref={inputRef}
+                    onBlur={() => setActiveBoardName(!isActiveBoardName)}
+                    value={boardName}
+                    onChange={handleChangeBoardName}
+                />
+            )}
         </div>
     )
 }

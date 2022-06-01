@@ -1,7 +1,7 @@
 @use '/src/styles/variable';
 
 .column {
-    width: 27.2rem;
+    width: variable.$column-width;
     border-radius: 0.3rem;
     overflow: hidden;
     background-color: variable.$column-color;
@@ -68,6 +68,7 @@
         }
         &::-webkit-scrollbar-track {
             background-color: #d8dbe2;
+            margin: 0.4rem;
         }
     }
 
