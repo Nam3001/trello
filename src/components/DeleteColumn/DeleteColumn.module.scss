@@ -1,0 +1,17 @@
+@use '/src/styles/variable' as *;
+
+.delete-column {
+    color: $column-color;
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+    margin-left: .6rem;
+
+    &:hover {
+        background-color: #d8d9db;
+        border-radius: 0.3rem;
+    }
+    svg {
+        font-size: 1.3rem;
+    }
+}
+

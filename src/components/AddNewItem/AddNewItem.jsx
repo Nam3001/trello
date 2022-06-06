@@ -3,20 +3,18 @@ import React, {
     useCallback,
     useEffect,
     useImperativeHandle,
-    useRef,
-    useState
+    useRef
 } from 'react'
 import classNames from 'classnames/bind'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 
-import style from './AddNewItem.module.scss'
-const cx = classNames.bind(style)
+import styles from './AddNewItem.module.scss'
+const cx = classNames.bind(styles)
 
 function AddNewItem(props, ref) {
     const { event, cardContent, columnName, type, placeholder } = props
-    const [isFirst, setIsFirst] = useState(true) // check first click on useEffect
     const inputRef = useRef()
     const componentRef = useRef()
     const addItemRef = useRef()
@@ -38,30 +36,29 @@ function AddNewItem(props, ref) {
 
     const close = useCallback(() => {
         if (type === 'column') {
-            componentRef.current.classList.add(style.hidden)
+            componentRef.current.classList.add(styles.hidden)
             setTimeout(() => {
                 event.onClose()
             }, 100)
-        } else event.onClose()
+        } else {
+            event.onClose()
+        }
     }, [event, type])
 
     useEffect(() => {
         const hiddenComponent = (e) => {
-            if (isFirst) {
-                setIsFirst(false)
-                return
-            }
             if (
                 e.target === componentRef.current ||
-                e.target === addItemRef.current
+                e.target.className === cx('card-input')
+                // e.target === inputRef.current alway false -> use className to check if click on inputRef
             )
                 return
             close()
         }
-
         window.addEventListener('click', hiddenComponent)
+
         return () => window.removeEventListener('click', hiddenComponent)
-    }, [close, isFirst])
+    }, [close])
 
     return (
         <div

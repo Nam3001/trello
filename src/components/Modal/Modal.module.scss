@@ -1,0 +1,68 @@
+@use '/src/styles/variable' as *;
+
+.modal {
+    font-size: 1.2rem;
+    border-radius: 1rem;
+
+    .header {
+        width: 100%;
+        border-bottom: 1px solid #ccc;
+        font-size: 1.8rem;
+        text-align: center;
+        padding: 0.5rem;
+    }
+
+    .content {
+        width: 100%;
+        padding: 1rem 0.5rem;
+    }
+
+    .actions {
+        width: 100%;
+        padding: 1rem 0.5rem;
+        margin: auto;
+        text-align: center;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .close {
+        cursor: pointer;
+        position: absolute;
+        display: block;
+        padding: 0.2rem 0.5rem;
+        line-height: 2rem;
+        right: -1rem;
+        top: -1rem;
+        font-size: 2.4rem;
+        background: #ffffff;
+        border-radius: 1.8rem;
+        border: 1px solid #cfcece;
+    }
+
+    .btn {
+        border: none;
+        color: $text-color;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        margin: 0 0.5rem;
+        cursor: pointer;
+    }
+
+    .confirm {
+        background-color: #0d6efd;
+
+        &:hover {
+            background-color: #0a5fdf;
+        }
+    }
+
+    .cancel {
+        background-color: #6c757d;
+
+        &:hover {
+            background-color: #555b61;
+        }
+    }
+    
+}

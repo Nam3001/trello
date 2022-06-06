@@ -10,14 +10,60 @@
     box-shadow: 0 1.5px 1px #ccc;
     border-radius: 0.3rem;
     user-select: none;
-    padding: 0 1rem;
-    line-height: 3.2rem;;
+    padding: 0.3rem;
+    padding-left: 1rem;
+    line-height: 3.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
     &:hover {
         cursor: grab;
-        background-color: #f6f4f4;
+        background-color: rgb(255, 255, 255, 0.7);
     }
     &:active {
         cursor: grabbing;
+    }
+
+    span {
+        flex: 1;
+    }
+
+    .removeCard, .editCard {
+        padding: 0.5rem;
+        display: none;
+        width: 2.6rem;
+        height: 2.6rem;
+        text-align: center;
+        border-radius: 0.3rem;
+        color: #afafb4;
+
+        &:hover {
+            background-color: #ebecf0;
+            border: 1px solid #ebe8e8;
+            cursor: pointer;
+        }
+
+        svg {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+        }
+    }
+
+    &:hover .editCard, &:hover .removeCard {
+        display: block;
+    }
+
+    input {
+        border: 2px solid $border-color;
+        border-radius: 0.4rem;
+        padding: 0.5rem;
+        width: calc(100% - 6rem);
+        height: 2.8rem;
+
+        &:focus{
+            outline: none;
+            border: 2px solid $border-color;
+        }
     }
 }

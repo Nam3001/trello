@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef, useContext } from 'react'
 import AutosizeInput from 'react-input-autosize'
-import style from './BoardName.module.scss'
+import styles from './BoardName.module.scss'
 import classNames from 'classnames'
 
 import { BoardContext } from '@/App'
 
 function BoardName() {
     const [isActiveBoardName, setActiveBoardName] = useState(false)
-    const { boardName, handleChangeBoardName } = useContext(BoardContext)
+    const { boardName, handleChangeBoardName, updateBoardName } =
+        useContext(BoardContext)
     const inputRef = useRef()
 
     useEffect(() => {
@@ -17,13 +18,13 @@ function BoardName() {
 
     return (
         <div
-            className={classNames(style.boardName)}
+            className={classNames(styles.boardName)}
             onClick={() => setActiveBoardName(true)}
         >
             <div
                 className={classNames({
-                    [style.active]: !isActiveBoardName,
-                    [style.nameDisplay]: true
+                    [styles.active]: !isActiveBoardName,
+                    [styles.nameDisplay]: true
                 })}
             >
                 {boardName}
@@ -31,10 +32,13 @@ function BoardName() {
 
             {isActiveBoardName && (
                 <AutosizeInput
-                    className={classNames(style.nameInputWrapper)}
-                    inputClassName={classNames(style.nameInput)}
+                    className={classNames(styles.nameInputWrapper)}
+                    inputClassName={classNames(styles.nameInput)}
                     ref={inputRef}
-                    onBlur={() => setActiveBoardName(!isActiveBoardName)}
+                    onBlur={() => {
+                        setActiveBoardName(!isActiveBoardName)
+                        updateBoardName()
+                    }}
                     value={boardName}
                     onChange={handleChangeBoardName}
                 />

@@ -44,15 +44,6 @@ html {
     font-size: 1.6rem;
 }
 
-.smooth-dnd-container.horizontal {
-    display: flex;
-    height: 100%;
-}
-
-.smooth-dnd-container.horizontal > .smooth-dnd-draggable-wrapper {
-    display: block;
-}
-
 
 .btn {
     margin: 0 1rem;
@@ -71,6 +62,43 @@ html {
     }
 }
 
+// config smooth dnd
+.smooth-dnd-container.horizontal {
+    display: flex;
+    height: 100%;
+}
+
+
 .smooth-dnd-container {
     min-height: 1px;
+}
+
+// style modal element
+.popup-content {
+    width: 35%;
+    margin-top: 2rem !important;
+    border-radius: 0.5rem;
+    -webkit-animation: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
+    animation: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
+}
+
+/* animation */
+
+@keyframes anvil {
+    0% {
+      transform: scale(0.96) translateY(10px);
+      opacity: 0;
+      box-shadow: 0 0 0 rgba(241, 241, 241, 0);
+    }
+    100% {
+      transform: scale(1) translateY(0px);
+      opacity: 1;
+      box-shadow: 0 0 500px rgba(241, 241, 241, 0);
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .popup-content {
+        width: 45%;
+    }
 }
