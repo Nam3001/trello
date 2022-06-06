@@ -5,21 +5,21 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 import classNames from 'classnames'
 
 import BoardName from '../BoardName/BoardName'
-import style from './BoardNav.module.scss'
+import styles from './BoardNav.module.scss'
 import svg from '@/assets/svg/spinner.svg'
 
 function BoardNav() {
     return (
         <>
-            <div className={style.boardNav}>
-                <button className={classNames(style.dropdown, 'btn')}>
-                    <span className={style.iconSpinner}>
+            <div className={styles.boardNav}>
+                <button className={classNames(styles.dropdown, 'btn')}>
+                    <span className={styles.iconSpinner}>
                         <img src={svg} alt="spinner" />
                     </span>
                     Bảng
-                    <span className={style.iconWrapper}>
+                    <span className={styles.iconWrapper}>
                         <FontAwesomeIcon
-                            className={style.icon}
+                            className={styles.icon}
                             icon={faChevronDown}
                         />
                     </span>

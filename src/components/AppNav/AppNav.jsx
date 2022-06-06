@@ -3,15 +3,15 @@ import classNames from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
-import style from './AppNav.module.scss'
+import styles from './AppNav.module.scss'
 
 function AppNav() {
     return (
-        <div className={classNames(style.appNav)}>
-            <div className={classNames(style.logo)}></div>
-            <div className={classNames(style.addBoard, 'btn')}>
+        <div className={classNames(styles.appNav)}>
+            <div className={classNames(styles.logo)}></div>
+            <div className={classNames(styles.addBoard, 'btn')}>
                 <FontAwesomeIcon
-                    className={classNames(style.icon)}
+                    className={classNames(styles.icon)}
                     icon={faPlus}
                 />
             </div>

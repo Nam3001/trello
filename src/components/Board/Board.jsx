@@ -1,21 +1,21 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect, useRef } from 'react'
+import { applyDrag, mapOrder } from '@/utils'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import classNames from 'classnames/bind'
-import { Container, Draggable } from 'react-smooth-dnd'
 import isEmpty from 'lodash.isempty'
 import { nanoid } from 'nanoid'
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
-
-import { mapOrder, applyDrag } from '@/utils'
-import Column from '../Column/Column'
-import style from './Board.module.scss'
+import React, { useEffect, useRef, useState } from 'react'
+import { Container, Draggable } from 'react-smooth-dnd'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import AddNewItem from '../AddNewItem/AddNewItem'
+import Column from '../Column/Column'
+import styles from './Board.module.scss'
 
 // bind classnames
-let cx = classNames.bind(style)
+let cx = classNames.bind(styles)
 
 function Board({ boardData }) {
     const [board, setBoard] = useState(boardData)
@@ -52,6 +52,7 @@ function Board({ boardData }) {
     const addColumnEvent = {
         onClose() {
             setIsAddingColumn(false)
+            setNewColumnName('')
         },
         onInput(e) {
             setNewColumnName(e.target.value)
@@ -81,7 +82,7 @@ function Board({ boardData }) {
     }, [board])
 
     return (
-        <div className={style.boardWrapper}>
+        <div className={styles.boardWrapper}>
             <div className={cx('board')}>
                 <div style={{ height: '100%' }}>
                     <Container
@@ -101,7 +102,7 @@ function Board({ boardData }) {
                         {columnList.map((column) => (
                             <Draggable key={column.columnId}>
                                 <Column
-                                    className={style.columnWrapper}
+                                    className={styles.columnWrapper}
                                     column={column}
                                     board={board}
                                     setBoard={setBoard}
@@ -110,7 +111,7 @@ function Board({ boardData }) {
                         ))}
                     </Container>
                 </div>
-                <div className={style.columnWrapper}>
+                <div className={styles.columnWrapper}>
                     <div>
                         {isAddingColumn ? (
                             <AddNewItem
@@ -127,7 +128,7 @@ function Board({ boardData }) {
                             >
                                 <span style={{ marginRight: '0.6rem' }}>
                                     <FontAwesomeIcon
-                                        className={classNames(style.icon)}
+                                        className={classNames(styles.icon)}
                                         icon={faPlus}
                                     />
                                 </span>
@@ -137,6 +138,7 @@ function Board({ boardData }) {
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     )
 }

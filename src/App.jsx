@@ -7,17 +7,26 @@ import data from './assets/data/data'
 export const BoardContext = createContext()
 
 function App() {
-    const [currentBoard, setCurrentBoard] = useState(data[0])
-    const [boardName, setBoardName] = useState(currentBoard.boardName)
+    const [boardName, setBoardName] = useState(data[0].boardName)
+    const [board, setBoard] = useState(data[0])
 
     const handleChangeBoardName = useCallback((event) => {
         setBoardName(event.target.value)
     }, [])
 
+    const updateBoardName = () => {
+        const newBoard = { ...board }
+        newBoard.boardName = boardName
+        console.log(newBoard)
+        setBoard(newBoard)
+    }
+
     const contextValue = {
         boardName,
         handleChangeBoardName,
-        boardData: currentBoard
+        boardData: board,
+        setBoardData: setBoard,
+        updateBoardName
     }
 
     return (
@@ -25,7 +34,7 @@ function App() {
             <div className="App">
                 <AppNav />
                 <BoardNav />
-                <Board boardData={currentBoard} />
+                <Board boardData={board} />
             </div>
         </BoardContext.Provider>
     )

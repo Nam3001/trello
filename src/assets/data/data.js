@@ -61,7 +61,7 @@ const data = [
                 {
                     columnId: 'column5',
                     boardId: 'board1',
-                    columnName: 'column_3',
+                    columnName: 'column_5',
                     cardOrder: ['card15', 'card16', 'card17'],
                     cardList: [
                         { cardId: 'card21', content: 'card_15', cover: null },

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useContext } from 'react'
 import classNames from 'classnames/bind'
 import { Container, Draggable } from 'react-smooth-dnd'
 // font
@@ -10,12 +10,16 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import style from './Column.module.scss'
 import Card from '../Card/Card'
 import AddNewItem from '../AddNewItem/AddNewItem'
+import DeleteColumn from '../DeleteColumn/DeleteColumn'
+import { BoardContext } from '@/App'
+
 // utilities
 import { mapOrder, applyDrag, createCardData } from '@/utils'
 
 let cx = classNames.bind(style)
 
 function Column(props) {
+    const { boardData, setBoardData } = useContext(BoardContext)
     const { className } = props
 
     // state
@@ -38,16 +42,18 @@ function Column(props) {
         const { removedIndex, addedIndex } = dropResult
         if (removedIndex === null && addedIndex === null) return
 
-        // S1:
-        // const newBoard = { ...board }
-        // const columnIndex = board.columns.columnList.findIndex(
-        //     (x) => x.columnId === columnId
-        // )
+        const newBoard = { ...boardData }
+        const columnIndex = boardData.columns.columnList.findIndex(
+            (x) => x.columnId === columnId
+        )
 
         const newColumn = { ...column }
         newColumn.cardList = applyDrag(newColumn.cardList, dropResult)
         setCards(newColumn.cardList)
         setColumn(newColumn)
+
+        newBoard.columns.columnList[columnIndex] = newColumn
+        setBoardData(newBoard)
     }
 
     const onChangeColumnName = (e) => {
@@ -59,6 +65,7 @@ function Column(props) {
     const addCardEvent = {
         onClose() {
             setIsAddingCard(false)
+            setNewCard('')
         },
         onInput(e) {
             e.target.style.height = e.target.scrollHeight + 'px'
@@ -81,19 +88,25 @@ function Column(props) {
     return (
         <div className={className}>
             <div className={style.column}>
-                <div
-                    className={cx('header', 'column-drag-handle')}
-                    onClick={() => {
-                        textareaRef.current.disabled = false
-                        textareaRef.current.focus()
-                    }}
-                >
-                    <textarea
-                        ref={textareaRef}
-                        value={column.columnName}
-                        onChange={onChangeColumnName}
-                        disabled
-                        onBlur={(e) => (e.target.disabled = true)}
+                <div className={cx('header', 'column-drag-handle')}>
+                    <div
+                        style={{ flex: 1 }}
+                        onClick={() => {
+                            textareaRef.current.disabled = false
+                            textareaRef.current.focus()
+                        }}
+                    >
+                        <textarea
+                            ref={textareaRef}
+                            value={column.columnName}
+                            onChange={onChangeColumnName}
+                            disabled
+                            onBlur={(e) => (e.target.disabled = true)}
+                        />
+                    </div>
+                    <DeleteColumn
+                        column={column}
+                        className={cx('delete-column')}
                     />
                 </div>
                 <div className={cx('body')}>
@@ -113,7 +126,9 @@ function Column(props) {
                     >
                         {cards.map((card) => (
                             <Draggable key={card.cardId}>
-                                <Card>{card.content}</Card>
+                                <Card column={column} card={card}>
+                                    {card.content}
+                                </Card>
                             </Draggable>
                         ))}
                     </Container>
