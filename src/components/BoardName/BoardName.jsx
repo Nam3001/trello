@@ -24,7 +24,7 @@ function BoardName() {
             <div
                 className={classNames({
                     [styles.active]: !isActiveBoardName,
-                    [styles.nameDisplay]: true
+                    [styles.nameDisplay]: true,
                 })}
             >
                 {boardName}

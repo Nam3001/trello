@@ -1,0 +1,65 @@
+@use '/src/styles/variable';
+
+.wrapper {
+    width: 100vw;
+    height: 100vh;
+
+    .nav {
+        background-color: rgb(102, 130, 156);
+        width: 100%; 
+        height: 4.4rem;
+        display: flex;
+        align-items: center;
+    
+        .logo {
+            margin-left: 1rem;
+            width: 8rem;
+            height: 3rem;
+            cursor: pointer;
+            padding: 0.5rem;
+    
+            &:hover {
+                background-color: variable.$white-color;
+                border-radius: 0.3rem;
+            }
+            &:hover::before {
+                display: none;
+            }
+            &:hover::after {
+                display: block;
+            }
+    
+            &::before, &::after {
+                content: "";
+                display: block;
+                width: 100%;
+                height: 100%;
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+    
+            &::before {
+                display: none;
+                background-image: url('https://a.trellocdn.com/prgb/dist/images/header-logo-spirit.d947df93bc055849898e.gif');
+            }
+    
+            &::after {
+                display: block;
+                background-image: url('https://a.trellocdn.com/prgb/dist/images/header-logo-spirit-loading.87e1af770a49ce8e84e3.gif');
+            }
+        }
+    }
+
+    .loading {
+        height: calc(100% - 5rem);
+        img {
+            display: block;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            margin: 0 auto;
+            width: 4rem;
+        }
+    }
+}
