@@ -1,10 +1,18 @@
-import React from 'react'
 import classNames from 'classnames/bind'
+import PropTypes from 'prop-types'
+import React from 'react'
 import Popup from 'reactjs-popup'
 import 'reactjs-popup/dist/index.css'
 import styles from './Modal.module.scss'
 
 const cx = classNames.bind(styles)
+
+Modal.propTypes = {
+    children: PropTypes.element.isRequired,
+    onConfirm: PropTypes.func.isRequired,
+    header: PropTypes.string,
+    content: PropTypes.string,
+}
 
 function Modal(props) {
     const { children, onConfirm, header, content } = props
@@ -36,4 +44,4 @@ function Modal(props) {
     )
 }
 
-export default Modal
+export default React.memo(Modal)

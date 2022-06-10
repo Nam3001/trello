@@ -1,24 +1,30 @@
-import React, { useEffect, useRef, useState } from 'react'
 import classNames from 'classnames/bind'
 import { nanoid } from 'nanoid'
+import React, { useEffect, useRef, useState } from 'react'
 import { Container, Draggable } from 'react-smooth-dnd'
 import { ToastContainer } from 'react-toastify'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { applyDrag, mapOrder } from '@/utils'
+import { applyDrag } from '@/utils'
 import 'react-toastify/dist/ReactToastify.css'
 import AddNewItem from '../AddNewItem/AddNewItem'
 import Column from '../Column/Column'
 import styles from './Board.module.scss'
+
+import PropTypes from 'prop-types'
+
+Board.propTypes = {
+    boardData: PropTypes.string.isRequired,
+    setBoardData: PropTypes.func.isRequired,
+}
 
 // bind classnames
 let cx = classNames.bind(styles)
 
 function Board({ boardData, setBoardData }) {
     const [columnList, setColumnList] = useState([])
-    const columnOrder = boardData.columnOrder
 
     const [isAddingColumn, setIsAddingColumn] = useState(false)
     // this is name of new column when adding new column
@@ -96,8 +102,6 @@ function Board({ boardData, setBoardData }) {
                                 <Column
                                     className={styles.columnWrapper}
                                     column={column}
-                                    board={boardData}
-                                    setBoard={setBoardData}
                                 />
                             </Draggable>
                         ))}
@@ -133,6 +137,11 @@ function Board({ boardData, setBoardData }) {
             <ToastContainer />
         </div>
     )
+}
+
+Board.propTypes = {
+    boardData: PropTypes.object.isRequired,
+    setBoardData: PropTypes.func.isRequired,
 }
 
 export default React.memo(Board)

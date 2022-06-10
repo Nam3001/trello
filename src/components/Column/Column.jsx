@@ -1,17 +1,16 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect, useRef, useContext } from 'react'
 import classNames from 'classnames/bind'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Container, Draggable } from 'react-smooth-dnd'
 // font
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 // component
-import style from './Column.module.scss'
-import Card from '../Card/Card'
-import AddNewItem from '../AddNewItem/AddNewItem'
-import DeleteColumn from '../DeleteColumn/DeleteColumn'
 import { BoardContext } from '@/App'
+import AddNewItem from '../AddNewItem/AddNewItem'
+import Card from '../Card/Card'
+import DeleteColumn from '../DeleteColumn/DeleteColumn'
+import style from './Column.module.scss'
 
 // utilities
 import { applyDrag, createCardData } from '@/utils'
