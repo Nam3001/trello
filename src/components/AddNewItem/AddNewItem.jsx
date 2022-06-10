@@ -3,7 +3,7 @@ import React, {
     useCallback,
     useEffect,
     useImperativeHandle,
-    useRef
+    useRef,
 } from 'react'
 import classNames from 'classnames/bind'
 
@@ -14,7 +14,8 @@ import styles from './AddNewItem.module.scss'
 const cx = classNames.bind(styles)
 
 function AddNewItem(props, ref) {
-    const { event, cardContent, columnName, type, placeholder } = props
+    const { event, cardContent, columnName, type, placeholder, columnId } =
+        props
     const inputRef = useRef()
     const componentRef = useRef()
     const addItemRef = useRef()
@@ -26,7 +27,7 @@ function AddNewItem(props, ref) {
         },
         scrollIntoView() {
             componentRef.current.scrollIntoView()
-        }
+        },
     }))
 
     useEffect(() => {
@@ -49,8 +50,8 @@ function AddNewItem(props, ref) {
         const hiddenComponent = (e) => {
             if (
                 e.target === componentRef.current ||
-                e.target.className === cx('card-input')
-                // e.target === inputRef.current alway false -> use className to check if click on inputRef
+                e.target === inputRef.current ||
+                e.target === addItemRef.current
             )
                 return
             close()
@@ -65,7 +66,7 @@ function AddNewItem(props, ref) {
             ref={componentRef}
             className={cx({
                 'add-card': props.type === 'card',
-                'add-column': props.type === 'column'
+                'add-column': props.type === 'column',
             })}
         >
             <Type
@@ -79,7 +80,7 @@ function AddNewItem(props, ref) {
             <button
                 ref={addItemRef}
                 className={cx('add-button')}
-                onClick={event.onAddItem}
+                onClick={() => event.onAddItem(columnId)}
             >
                 {type === 'card' ? 'thêm thẻ' : 'Thêm danh sách'}
             </button>

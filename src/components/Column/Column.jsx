@@ -14,7 +14,7 @@ import DeleteColumn from '../DeleteColumn/DeleteColumn'
 import { BoardContext } from '@/App'
 
 // utilities
-import { mapOrder, applyDrag, createCardData } from '@/utils'
+import { applyDrag, createCardData } from '@/utils'
 
 let cx = classNames.bind(style)
 
@@ -34,8 +34,7 @@ function Column(props) {
 
     const cardOrder = column.cardOrder
     useEffect(() => {
-        const newCardList = mapOrder(column.cardList, cardOrder, 'cardId')
-        setCards(newCardList)
+        setCards(column.cardList)
     }, [])
 
     const onCardDrop = (dropResult, columnId) => {
@@ -72,7 +71,7 @@ function Column(props) {
             const cardContent = e.target.value
             setNewCard(cardContent)
         },
-        onAddItem() {
+        onAddItem(columnId) {
             if (newCard === '') return
 
             const cardList = createCardData(cards, newCard)
@@ -82,7 +81,15 @@ function Column(props) {
             setColumn(newColumn)
             setNewCard('')
             addCardRef.current.focus()
-        }
+
+            const newBoard = { ...boardData }
+            const columnIndex = boardData.columns.columnList.findIndex(
+                (x) => x.columnId === columnId
+            )
+
+            newBoard.columns.columnList[columnIndex] = newColumn
+            setBoardData(newBoard)
+        },
     }
 
     return (
@@ -117,7 +124,7 @@ function Column(props) {
                         dropPlaceholder={{
                             animationDuration: 150,
                             showOnTop: true,
-                            className: cx('card-drop-preview')
+                            className: cx('card-drop-preview'),
                         }}
                         getChildPayload={(index) => column.cardList[index]}
                         onDrop={(payload) =>
@@ -139,6 +146,7 @@ function Column(props) {
                                 ref={addCardRef}
                                 cardContent={newCard}
                                 event={addCardEvent}
+                                columnId={column.columnId}
                                 placeholder="Nhập tiêu đề cho thẻ này..."
                             />
                         </div>

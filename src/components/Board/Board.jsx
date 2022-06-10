@@ -1,13 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Container, Draggable } from 'react-smooth-dnd'
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
 import classNames from 'classnames/bind'
 import { nanoid } from 'nanoid'
+import { Container, Draggable } from 'react-smooth-dnd'
+import { ToastContainer } from 'react-toastify'
 
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
+
 import { applyDrag, mapOrder } from '@/utils'
+import 'react-toastify/dist/ReactToastify.css'
 import AddNewItem from '../AddNewItem/AddNewItem'
 import Column from '../Column/Column'
 import styles from './Board.module.scss'
@@ -15,70 +16,67 @@ import styles from './Board.module.scss'
 // bind classnames
 let cx = classNames.bind(styles)
 
-function Board({ boardData }) {
-    // const [columnList, setColumnList] = useState([])
-    // const columnOrder = board.columnOrder
+function Board({ boardData, setBoardData }) {
+    const [columnList, setColumnList] = useState([])
+    const columnOrder = boardData.columnOrder
 
-    // const [isAddingColumn, setIsAddingColumn] = useState(false)
+    const [isAddingColumn, setIsAddingColumn] = useState(false)
     // this is name of new column when adding new column
-    // const [newColumnName, setNewColumnName] = useState('')
+    const [newColumnName, setNewColumnName] = useState('')
 
-    // const addColumnRef = useRef(null)
+    const addColumnRef = useRef(null)
 
-    // useEffect(() => {
-    //     const newColumnList = mapOrder(
-    //         board.columns.columnList,
-    //         columnOrder,
-    //         'columnId'
-    //     )
-    //     setColumnList(newColumnList)
-    // }, [])
-    // console.log('render')
+    useEffect(() => {
+        setColumnList(boardData.columns.columnList)
+    }, [])
 
-    // const onColumnDrop = (dropResult) => {
-    //     const newColumns = applyDrag([...columnList], dropResult)
-    //     const newBoard = { ...board }
-    //     newBoard.columns.columnList = newColumns
-    //     setColumnList(newColumns)
-    //     setBoard(newBoard)
-    // }
+    useEffect(() => {
+        setColumnList(boardData.columns.columnList)
+    }, [boardData])
 
-    // const addColumnEvent = {
-    //     onClose() {
-    //         setIsAddingColumn(false)
-    //         setNewColumnName('')
-    //     },
-    //     onInput(e) {
-    //         setNewColumnName(e.target.value)
-    //     },
-    //     onAddItem() {
-    //         if (newColumnName === '') return
+    const onColumnDrop = (dropResult) => {
+        const newColumns = applyDrag([...columnList], dropResult)
+        const newBoard = { ...boardData }
+        newBoard.columns.columnList = newColumns
+        setBoardData(newBoard)
+    }
 
-    //         const newColumn = {
-    //             columnId: `column-${nanoid()}`,
-    //             columnName: newColumnName,
-    //             cardOrder: [],
-    //             cardList: [],
-    //         }
-    //         const newBoard = { ...board }
-    //         newBoard.columns?.columnList.push(newColumn)
+    const addColumnEvent = {
+        onClose() {
+            setIsAddingColumn(false)
+            setNewColumnName('')
+        },
+        onInput(e) {
+            setNewColumnName(e.target.value)
+        },
+        onAddItem() {
+            if (newColumnName === '') return
 
-    //         setBoard(newBoard)
-    //         setNewColumnName('')
-    //     },
-    // }
+            const newColumn = {
+                columnId: `column-${nanoid()}`,
+                columnName: newColumnName,
+                cardList: [],
+            }
+            const newBoard = { ...boardData }
+            newBoard.columns?.columnList.push(newColumn)
 
-    // useEffect(() => {
-    //     if (isAddingColumn) {
-    //         addColumnRef.current.scrollIntoView()
-    //         addColumnRef.current.focus()
-    //     }
-    // }, [board])
+            console.log(newBoard)
+            setBoardData(newBoard)
+            setNewColumnName('')
+        },
+    }
+
+    useEffect(() => {
+        if (isAddingColumn) {
+            addColumnRef.current.scrollIntoView()
+            addColumnRef.current.focus()
+        }
+    }, [boardData])
 
     return (
         <div className={styles.boardWrapper}>
             <div className={cx('board')}>
-                {/* <div style={{ height: '100%' }}>
+                <div style={{ height: '100%' }}>
                     <Container
                         orientation="horizontal"
                         dragHandleSelector=".column-drag-handle"
@@ -89,7 +87,7 @@ function Board({ boardData }) {
                             className: cx('column-drop-preview'),
                         }}
                         getChildPayload={(index) => {
-                            return board.columns.columnList[index]
+                            return boardData.columns.columnList[index]
                         }}
                         onDrop={onColumnDrop}
                     >
@@ -98,8 +96,8 @@ function Board({ boardData }) {
                                 <Column
                                     className={styles.columnWrapper}
                                     column={column}
-                                    board={board}
-                                    setBoard={setBoard}
+                                    board={boardData}
+                                    setBoard={setBoardData}
                                 />
                             </Draggable>
                         ))}
@@ -130,7 +128,7 @@ function Board({ boardData }) {
                             </div>
                         )}
                     </div>
-                </div> */}
+                </div>
             </div>
             <ToastContainer />
         </div>

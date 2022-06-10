@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react'
 import styles from './Card.module.scss'
+import classNames from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencil } from '@fortawesome/free-solid-svg-icons'
 
@@ -65,9 +66,16 @@ function Card({ children, column, card }) {
     return (
         <div className={styles.card}>
             {isEditing ? (
-                <input
+                <textarea
+                    onFocus={(e) => {
+                        e.target.style.height = e.target.scrollHeight + 'px'
+                        e.target.select()
+                    }}
                     onBlur={handleUpdateCard}
-                    onChange={(e) => setCardContent(e.target.value)}
+                    onChange={(e) => {
+                        e.target.style.height = e.target.scrollHeight + 'px'
+                        setCardContent(e.target.value)
+                    }}
                     ref={(_input) => (inputRef = _input)}
                     value={cardContent}
                 />
@@ -75,18 +83,24 @@ function Card({ children, column, card }) {
                 <span>{cardContent}</span>
             )}
             <div
-                onClick={() => {
-                    setIsEditing(true)
-                }}
-                className={styles.editCard}
+                className={classNames(styles.cardUtils, {
+                    [styles.hidden]: isEditing,
+                })}
             >
-                <FontAwesomeIcon icon={faPencil} />
-            </div>
+                <div
+                    onClick={() => {
+                        setIsEditing(true)
+                    }}
+                    className={styles.editCard}
+                >
+                    <FontAwesomeIcon icon={faPencil} />
+                </div>
 
-            <DeleteCard
-                onDeleteCard={handleDeleteCard}
-                className={styles.removeCard}
-            />
+                <DeleteCard
+                    onDeleteCard={handleDeleteCard}
+                    className={styles.removeCard}
+                />
+            </div>
         </div>
     )
 }

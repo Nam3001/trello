@@ -7,14 +7,18 @@ import { BoardContext } from '@/App'
 
 function BoardName() {
     const [isActiveBoardName, setActiveBoardName] = useState(false)
-    const { boardName, handleChangeBoardName, updateBoardName } =
-        useContext(BoardContext)
+    const { boardName, updateBoardName } = useContext(BoardContext)
+    const [name, setName] = useState(boardName)
     const inputRef = useRef()
 
     useEffect(() => {
         inputRef?.current?.focus()
         inputRef?.current?.select()
     }, [isActiveBoardName])
+
+    const handleChangeBoardName = (e) => {
+        setName(e.target.value)
+    }
 
     return (
         <div
@@ -27,7 +31,7 @@ function BoardName() {
                     [styles.nameDisplay]: true,
                 })}
             >
-                {boardName}
+                {name}
             </div>
 
             {isActiveBoardName && (
@@ -37,9 +41,9 @@ function BoardName() {
                     ref={inputRef}
                     onBlur={() => {
                         setActiveBoardName(!isActiveBoardName)
-                        updateBoardName()
+                        updateBoardName(name)
                     }}
-                    value={boardName}
+                    value={name}
                     onChange={handleChangeBoardName}
                 />
             )}
