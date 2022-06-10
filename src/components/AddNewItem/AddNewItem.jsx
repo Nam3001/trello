@@ -6,6 +6,7 @@ import React, {
     useRef,
 } from 'react'
 import classNames from 'classnames/bind'
+import PropTypes from 'prop-types'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
@@ -13,7 +14,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import styles from './AddNewItem.module.scss'
 const cx = classNames.bind(styles)
 
-function AddNewItem(props, ref) {
+function Component(props, ref) {
     const { event, cardContent, columnName, type, placeholder, columnId } =
         props
     const inputRef = useRef()
@@ -91,4 +92,18 @@ function AddNewItem(props, ref) {
     )
 }
 
-export default React.memo(forwardRef(AddNewItem))
+const AddNewItem = forwardRef(Component)
+AddNewItem.propTypes = {
+    event: PropTypes.shape({
+        onClose: PropTypes.func.isRequired,
+        onInput: PropTypes.func.isRequired,
+        onAddItem: PropTypes.func.isRequired,
+    }),
+    cardContent: PropTypes.string,
+    columnName: PropTypes.string,
+    placeholder: PropTypes.string,
+    columnId: PropTypes.string,
+    type: PropTypes.oneOf(['column', 'card']),
+}
+
+export default React.memo(AddNewItem)

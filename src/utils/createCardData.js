@@ -8,7 +8,6 @@ const createCardData = (cards, cardContent) => {
     const cardItem = {
         cardId,
         content: cardContent,
-        cover: null
     }
     cardList.push(cardItem)
     return cardList

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const axiosClient = axios.create({
-    baseURL: 'http://localhost:3000/api',
+    baseURL: 'https://fake-api-trello.herokuapp.com/api',
     headers: {
         'Content-Type': 'application/json',
     },

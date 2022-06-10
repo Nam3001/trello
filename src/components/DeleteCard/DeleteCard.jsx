@@ -1,15 +1,21 @@
-import React, { useEffect } from 'react'
 import classNames from 'classnames'
+import PropTypes from 'prop-types'
+import React from 'react'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import styles from './DeleteCard.module.scss'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Modal from '../Modal/Modal'
 
 const cx = classNames.bind(styles)
+
+DeleteCard.propTypes = {
+    className: PropTypes.string,
+    onDeleteCard: PropTypes.func,
+}
 
 function DeleteCard({ className, onDeleteCard }) {
     const handleConfirm = (closeModal) => {
@@ -18,13 +24,13 @@ function DeleteCard({ className, onDeleteCard }) {
             closeModal()
             toast.success('Card deleted', {
                 toastId: 'delete-card-success',
-                autoClose: 2000
+                autoClose: 2000,
             })
         } catch (err) {
             closeModal()
             toast.error(err.message, {
                 toastId: 'delete-card-error',
-                autoClose: 2000
+                autoClose: 2000,
             })
         }
     }
@@ -42,4 +48,4 @@ function DeleteCard({ className, onDeleteCard }) {
     )
 }
 
-export default DeleteCard
+export default React.memo(DeleteCard)

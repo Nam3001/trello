@@ -1,11 +1,18 @@
-import React, { useContext, useState, useEffect } from 'react'
-import styles from './Card.module.scss'
 import classNames from 'classnames'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React, { useContext, useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { faPencil } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import styles from './Card.module.scss'
 
-import DeleteCard from '../DeleteCard/DeleteCard'
 import { BoardContext } from '@/App'
+import DeleteCard from '../DeleteCard/DeleteCard'
+
+Card.propTypes = {
+    children: PropTypes.string.isRequired,
+    column: PropTypes.object.isRequired,
+    card: PropTypes.object.isRequired,
+}
 
 function Card({ children, column, card }) {
     const [isEditing, setIsEditing] = useState(false)

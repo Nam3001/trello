@@ -1,7 +1,7 @@
 @use '/src/styles/variable';
 
 .boardName {
-    max-width: calc(100vw - variable.$board-btn-width - 0.5rem);
+    max-width: calc(100vw - variable.$board-btn-width - 5rem);
     display: flex;
     align-items: center;
     height: 3.2rem;
