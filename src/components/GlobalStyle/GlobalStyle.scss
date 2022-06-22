@@ -65,12 +65,12 @@ html {
 // config smooth dnd
 .smooth-dnd-container.horizontal {
     display: flex !important;
-    height: 100%;
+    height: 100% !important;
 }
 
 
 .smooth-dnd-container {
-    min-height: 1px;
+    min-height: 1px !important;
 }
 
 // style modal element
