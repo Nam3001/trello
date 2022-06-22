@@ -8,10 +8,12 @@
         
     .board {
         display: flex;
-        height: calc(100% - 0.75rem);
+        height: calc(100% - 0.6rem);
         width: auto;
         overflow-x: auto;
-        margin: 0 1.6rem 1.6rem;
+        margin: 0 1.6rem;
+        scrollbar-width: thin;
+        scrollbar-color: $hover-color rgb(4, 90, 4, 0.3);
 
         &::-webkit-scrollbar {
             appearance: none;
@@ -20,8 +22,8 @@
         }
         &::-webkit-scrollbar:horizontal {
             height: 1.2rem;
-
         }
+
         &::-webkit-scrollbar-thumb {
             border-radius: 0.5rem;
             background-color: $hover-color;

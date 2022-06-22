@@ -17,8 +17,6 @@
         border-radius: 0.3rem;
         cursor: grab;
 
-        
-    
     &:hover {
         .delete-column {
             color: #8f99aa;
@@ -52,6 +50,10 @@
                 cursor: grabbing;
             }
         }
+
+        .columnName {
+            @extend textarea;
+        }
     }
 
     .body {
@@ -59,23 +61,29 @@
         overflow-y: auto;
         padding: 0 0.5rem;
         margin: 0 0.4rem;
+        scrollbar-width: thin;
+        scrollbar-color: #bfc2cd #d8dbe2;
 
         &::-webkit-scrollbar {
             appearance: none;
             -webkit-appearance: none;
+            -moz-appearance: none;
         }
+
         &::-webkit-scrollbar:vertical {
             width: 0.8rem;
         }
-        &::-webkit-scrollbar-thumb,
-        &::-webkit-scrollbar-track {
+
+        &::-webkit-scrollbar-thumb:vertical,
+        &::-webkit-scrollbar-track:vertical {
             border-radius: 0.5rem;
         }
         
-        &::-webkit-scrollbar-thumb {
+        &::-webkit-scrollbar-thumb:vertical {
             background-color: #bfc2cd;
         }
-        &::-webkit-scrollbar-track {
+
+        &::-webkit-scrollbar-track:vertical {
             background-color: #d8dbe2;
             margin: 0.4rem;
         }
