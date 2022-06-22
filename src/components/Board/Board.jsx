@@ -66,7 +66,6 @@ function Board({ boardData, setBoardData }) {
             const newBoard = { ...boardData }
             newBoard.columns?.columnList.push(newColumn)
 
-            console.log(newBoard)
             setBoardData(newBoard)
             setNewColumnName('')
         },

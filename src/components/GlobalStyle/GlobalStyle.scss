@@ -64,7 +64,7 @@ html {
 
 // config smooth dnd
 .smooth-dnd-container.horizontal {
-    display: flex;
+    display: flex !important;
     height: 100%;
 }
 

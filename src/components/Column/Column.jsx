@@ -36,8 +36,6 @@ function Column(props) {
         setCards(column.cardList)
     }, [])
 
-    console.log('rerender')
-
     const onCardDrop = (dropResult, columnId) => {
         const { removedIndex, addedIndex } = dropResult
         if (removedIndex === null && addedIndex === null) return
@@ -105,10 +103,7 @@ function Column(props) {
                 <div className={cx('header', 'column-drag-handle')}>
                     <div
                         style={{ flex: 1 }}
-                        onClick={() => {
-                            setIsChangeColumnName(true)
-                            console.log('click')
-                        }}
+                        onClick={() => setIsChangeColumnName(true)}
                     >
                         {isChangeColumnName ? (
                             <textarea
