@@ -26,15 +26,17 @@ function Column(props) {
     const [column, setColumn] = useState(props.column)
     const [cards, setCards] = useState(column.cardList)
     const [newCard, setNewCard] = useState('')
+    const [isChangeColumnName, setIsChangeColumnName] = useState(false)
 
     // ref
     const textareaRef = useRef(null)
     const addCardRef = useRef(null)
 
-    const cardOrder = column.cardOrder
     useEffect(() => {
         setCards(column.cardList)
     }, [])
+
+    console.log('rerender')
 
     const onCardDrop = (dropResult, columnId) => {
         const { removedIndex, addedIndex } = dropResult
@@ -91,6 +93,12 @@ function Column(props) {
         },
     }
 
+    useEffect(() => {
+        if (!isChangeColumnName) return
+        textareaRef.current.focus()
+        textareaRef.current.select()
+    }, [isChangeColumnName])
+
     return (
         <div className={className}>
             <div className={style.column}>
@@ -98,17 +106,22 @@ function Column(props) {
                     <div
                         style={{ flex: 1 }}
                         onClick={() => {
-                            textareaRef.current.disabled = false
-                            textareaRef.current.focus()
+                            setIsChangeColumnName(true)
+                            console.log('click')
                         }}
                     >
-                        <textarea
-                            ref={textareaRef}
-                            value={column.columnName}
-                            onChange={onChangeColumnName}
-                            disabled
-                            onBlur={(e) => (e.target.disabled = true)}
-                        />
+                        {isChangeColumnName ? (
+                            <textarea
+                                ref={textareaRef}
+                                value={column.columnName}
+                                onChange={onChangeColumnName}
+                                onBlur={() => setIsChangeColumnName(false)}
+                            />
+                        ) : (
+                            <div className={cx(style.columnName)}>
+                                {column.columnName}
+                            </div>
+                        )}
                     </div>
                     <DeleteColumn
                         column={column}
