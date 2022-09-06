@@ -29,7 +29,9 @@ function App() {
     }, [])
 
     useEffect(() => {
-        boardApi.update('board1', JSON.stringify(board))
+        if (!isEmpty(board)) {
+            boardApi.update('board1', JSON.stringify(board))
+        }
     }, [board])
 
     const updateBoardName = useCallback(
