@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind'
 import { nanoid } from 'nanoid'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Container, Draggable } from 'react-smooth-dnd'
 import { ToastContainer } from 'react-toastify'
 
@@ -36,7 +36,7 @@ function Board({ boardData, setBoardData }) {
         setColumnList(boardData.columns.columnList)
     }, [])
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         setColumnList(boardData.columns.columnList)
     }, [boardData])
 
